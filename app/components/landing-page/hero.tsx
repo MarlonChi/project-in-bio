@@ -26,7 +26,7 @@ export const Hero = () => {
       <div className="w-full flex items-center justify-center bg-[radial-gradient(circle_at_50%_50%,#4b2dbb,transparent_55%)]">
         <div className="relative">
           <UserCard />
-          <div className="absolute -bottom-[-7%] -right-[45%]">
+          <div className="absolute bottom-[-7%] -right-[35%]">
             <TotalVisits />
           </div>
           <div className="absolute top-[20%] -left-[45%] -z-10">
