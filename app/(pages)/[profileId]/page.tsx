@@ -1,7 +1,9 @@
+import Link from "next/link";
+import { Plus } from "lucide-react";
+
 import { ProjectCard } from "@/app/components/commons/project-card";
 import { TotalVisits } from "@/app/components/commons/total-visits";
 import { UserCard } from "@/app/components/commons/user-card";
-import { Plus } from "lucide-react";
 
 const ProfilePage = async ({ params }: { params: { profileId: string } }) => {
   const { profileId } = await params;
@@ -10,9 +12,11 @@ const ProfilePage = async ({ params }: { params: { profileId: string } }) => {
     <div className="relative h-screen flex p-20 overflow-hidden">
       <div className="fixed top-0 left-0 w-full flex justify-center items-center gap-1 py-2 bg-background-tertiary">
         <span>Você está usando a versão trial.</span>
-        <button className="text-accent-green font-bold cursor-pointer">
-          Faça o upgrade agora!
-        </button>
+        <Link href={`/${profileId}/upgrade`}>
+          <button className="text-accent-green font-bold cursor-pointer">
+            Faça o upgrade agora!
+          </button>
+        </Link>
       </div>
       <div className="w-1/2 flex justify-center h-min">
         <UserCard />
