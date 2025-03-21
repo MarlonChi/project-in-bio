@@ -5,7 +5,11 @@ import { ProjectCard } from "@/app/components/commons/project-card";
 import { TotalVisits } from "@/app/components/commons/total-visits";
 import { UserCard } from "@/app/components/commons/user-card";
 
-const ProfilePage = async ({ params }: { params: { profileId: string } }) => {
+const ProfilePage = async ({
+  params,
+}: {
+  params: Promise<{ profileId: string }>;
+}) => {
   const { profileId } = await params;
 
   return (
