@@ -50,7 +50,7 @@ export const CreateLinkForm = () => {
           value={link}
           onChange={(e) => handleLinkChange(e.target.value)}
         />
-        <Button className="w-[126px] cursor-pointer">Criar</Button>
+        <Button className="w-[126px]">Criar</Button>
       </form>
       <div>
         <span className="text-accent-pink">{error}</span>
