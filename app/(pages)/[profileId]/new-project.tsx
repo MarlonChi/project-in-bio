@@ -36,11 +36,11 @@ export const NewProject = ({ profileId }: NewProjectProps) => {
   };
 
   const handleImageInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.[0] ?? null;
 
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      return imageUrl;
+      const imageURL = URL.createObjectURL(file);
+      return imageURL;
     }
 
     return null;
@@ -52,7 +52,7 @@ export const NewProject = ({ profileId }: NewProjectProps) => {
       "imageInput"
     ) as HTMLInputElement;
 
-    if (!imagesInput.files) return;
+    if (!imagesInput.files?.length) return;
 
     const compressedFile = await compressFiles(Array.from(imagesInput.files));
 
@@ -60,9 +60,9 @@ export const NewProject = ({ profileId }: NewProjectProps) => {
 
     formData.append("file", compressedFile[0]);
     formData.append("profileId", profileId);
-    formData.append("name", projectName);
-    formData.append("description", projectDescription);
-    formData.append("url", projectUrl);
+    formData.append("projectName", projectName);
+    formData.append("projectDescription", projectDescription);
+    formData.append("projectUrl", projectUrl);
 
     await createProject(formData);
 
@@ -73,6 +73,7 @@ export const NewProject = ({ profileId }: NewProjectProps) => {
       setProjectDescription("");
       setProjectUrl("");
       setProjectImage(null);
+
       router.refresh();
     });
   };
