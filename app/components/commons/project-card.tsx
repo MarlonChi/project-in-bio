@@ -12,8 +12,10 @@ export const ProjectCard = ({
   isOwner: boolean;
   img: string | undefined;
 }) => {
-  const projectUrl = project.projectUrl;
-  const formattedUrl = projectUrl.startsWith("http")
+  if (!project) return;
+
+  const projectUrl = project?.projectUrl;
+  const formattedUrl = projectUrl?.startsWith("http")
     ? projectUrl
     : `https://${projectUrl}`;
 
