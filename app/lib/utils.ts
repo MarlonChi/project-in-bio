@@ -42,3 +42,7 @@ export const compressImage = (file: File): Promise<File> => {
     });
   });
 };
+
+export function formatUrl(url: string) {
+  return url.startsWith("http") ? url : `https://${url}`;
+}
