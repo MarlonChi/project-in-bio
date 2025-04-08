@@ -8,7 +8,11 @@ import { Modal } from "@/app/components/ui/modal";
 import { TextInput } from "@/app/components/ui/text-input";
 import { TextArea } from "@/app/components/ui/text-area";
 import { Button } from "@/app/components/ui/button";
-import { compressFiles } from "@/app/lib/utils";
+import {
+  compressFiles,
+  handleImageInput,
+  triggerImageInput,
+} from "@/app/lib/utils";
 import { createProject } from "@/app/actions/create-project";
 
 interface NewProjectProps {
@@ -30,21 +34,6 @@ export const NewProject = ({ profileId }: NewProjectProps) => {
   const handleOpenModal = () => setIsOpen(true);
 
   const handleCloseModal = () => setIsOpen(false);
-
-  const triggerImageInput = (id: string) => {
-    document.getElementById(id)?.click();
-  };
-
-  const handleImageInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] ?? null;
-
-    if (file) {
-      const imageURL = URL.createObjectURL(file);
-      return imageURL;
-    }
-
-    return null;
-  };
 
   const handleSaveProject = async () => {
     setIsCreatingProject(true);

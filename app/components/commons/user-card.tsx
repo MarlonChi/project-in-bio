@@ -1,29 +1,42 @@
 import Link from "next/link";
 import { Github, Instagram, Linkedin, Twitter } from "lucide-react";
 
-import { Button } from "../ui/button";
-import EditSocialLinks from "./user-card/edit-social-links";
 import { ProfileData } from "@/app/server/get-profile-data";
-import { AddCustomLink } from "./user-card/add-custom-link";
 import { formatUrl } from "@/app/lib/utils";
+import { Button } from "../ui/button";
+import { AddCustomLink } from "./user-card/add-custom-link";
+import EditSocialLinks from "./user-card/edit-social-links";
+import EditUserCard from "./user-card/edit-user-card";
+import { getDownloadURLFromPath } from "@/app/lib/firebase";
 
-export const UserCard = ({ profileData }: { profileData?: ProfileData }) => {
+export const UserCard = async ({
+  profileData,
+  isOwner,
+}: {
+  profileData?: ProfileData;
+  isOwner?: boolean;
+}) => {
   return (
     <div className="w-[348px] flex flex-col gap-5 items-center p-5 border border-white-10 bg-[#121212] rounded-3xl text-white">
       <div className="size-48">
         <img
-          src="/me.png"
-          alt="Marlon"
+          src={
+            (await getDownloadURLFromPath(profileData?.imagePath)) || "/me.webp"
+          }
+          alt="Usuário"
           className="rounded-full object-cover w-full h-full"
         />
       </div>
       <div className="flex flex-col gap-2 w-full">
         <div className="flex items-center gap-2">
           <h3 className="text-3xl font-bold min-w-0 overflow-hidden">
-            Marlon Chiodelli
+            {profileData?.name || ""}
           </h3>
+          {isOwner && <EditUserCard profileData={profileData} />}
         </div>
-        <p className="opacity-40">"Eu faço produtos para a Internet"</p>
+        <p className="opacity-40">
+          {profileData?.description || "Eu faço produtos para a Internet"}
+        </p>
       </div>
       <div className="flex flex-col gap-2 w-full">
         <span className="uppercase text-xs font-medium">Links</span>
@@ -66,10 +79,12 @@ export const UserCard = ({ profileData }: { profileData?: ProfileData }) => {
               <Twitter />
             </Link>
           )}
-          <EditSocialLinks socialMedias={profileData?.socialMedias} />
+          {isOwner && (
+            <EditSocialLinks socialMedias={profileData?.socialMedias} />
+          )}
         </div>
       </div>
-      <div className="flex flex-col gap-3 w-full h-[172px]">
+      <div className="flex flex-col gap-3 w-full min-h-[172px]">
         <div className="w-full flex flex-col items-center gap-3">
           {profileData?.link1 && (
             <Link
@@ -100,7 +115,7 @@ export const UserCard = ({ profileData }: { profileData?: ProfileData }) => {
           )}
         </div>
       </div>
-      <AddCustomLink />
+      {isOwner && <AddCustomLink />}
     </div>
   );
 };
