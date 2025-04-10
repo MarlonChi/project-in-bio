@@ -11,6 +11,7 @@ import {
 import { auth } from "@/app/lib/auth";
 import { NewProject } from "./new-project";
 import { getDownloadURLFromPath } from "@/app/lib/firebase";
+import { increaseProfileVisits } from "@/app/actions/increase-profile-visits";
 
 const ProfilePage = async ({
   params,
@@ -28,6 +29,10 @@ const ProfilePage = async ({
   const session = await auth();
 
   const isOwner = profileData.userId === session?.user?.id;
+
+  if (!isOwner) {
+    await increaseProfileVisits(profileId);
+  }
 
   return (
     <div className="relative h-screen flex p-20 overflow-hidden">
@@ -55,7 +60,7 @@ const ProfilePage = async ({
         {isOwner && <NewProject profileId={profileId} />}
       </div>
       <div className="absolute bottom-4 right-0 left-0 w-min mx-auto">
-        <TotalVisits />
+        <TotalVisits totalVisits={profileData.totalVisits} />
       </div>
     </div>
   );
