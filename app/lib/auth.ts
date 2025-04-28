@@ -1,8 +1,7 @@
 import NextAuth, { DefaultSession } from "next-auth";
-import { FirestoreAdapter } from "@auth/firebase-adapter";
-import Google from "next-auth/providers/google";
-
 import { db, firebaseCert } from "./firebase";
+import Google from "next-auth/providers/google";
+import { FirestoreAdapter } from "@auth/firebase-adapter";
 import { Timestamp } from "firebase-admin/firestore";
 import { TRIALS_DAYS } from "./config";
 
@@ -21,7 +20,7 @@ declare module "next-auth" {
   }
 }
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const { auth, handlers, signIn, signOut } = NextAuth({
   adapter: FirestoreAdapter({
     credential: firebaseCert,
   }),
