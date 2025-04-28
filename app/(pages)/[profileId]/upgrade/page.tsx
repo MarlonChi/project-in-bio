@@ -1,5 +1,12 @@
+import { Metadata } from "next";
+
 import { Header } from "@/app/components/landing-page/header";
 import PlanButtons from "./plan-buttons";
+
+export const metadata: Metadata = {
+  title: "ProjectInBio - Upgrade",
+  description: "ProjectInBio - A plataforma de gestão de projetos em biologia.",
+};
 
 const Upgrade = () => {
   return (

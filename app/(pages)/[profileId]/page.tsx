@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { Metadata } from "next";
 
 import { ProjectCard } from "@/app/components/commons/project-card";
 import { TotalVisits } from "@/app/components/commons/total-visits";
@@ -12,6 +13,11 @@ import { auth } from "@/app/lib/auth";
 import { NewProject } from "./new-project";
 import { getDownloadURLFromPath } from "@/app/lib/firebase";
 import { increaseProfileVisits } from "@/app/actions/increase-profile-visits";
+
+export const metadata: Metadata = {
+  title: "ProjectInBio - Perfil",
+  description: "ProjectInBio - A plataforma de gestão de projetos em biologia.",
+};
 
 const ProfilePage = async ({
   params,

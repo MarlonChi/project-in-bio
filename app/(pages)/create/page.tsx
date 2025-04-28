@@ -1,8 +1,14 @@
 import { Rocket } from "lucide-react";
+import { Metadata } from "next";
 
 import { Header } from "@/app/components/landing-page/header";
 import { CreateLinkForm } from "./create-link-form";
 import { trackServerEvent } from "@/app/lib/mixpanel";
+
+export const metadata: Metadata = {
+  title: "ProjectInBio - Criar",
+  description: "ProjectInBio - Criar",
+};
 
 const Create = () => {
   trackServerEvent("page_view", {
