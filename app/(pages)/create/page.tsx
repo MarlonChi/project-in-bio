@@ -2,8 +2,13 @@ import { Rocket } from "lucide-react";
 
 import { Header } from "@/app/components/landing-page/header";
 import { CreateLinkForm } from "./create-link-form";
+import { trackServerEvent } from "@/app/lib/mixpanel";
 
 const Create = () => {
+  trackServerEvent("page_view", {
+    page: "home",
+  });
+
   return (
     <div>
       <Header />
