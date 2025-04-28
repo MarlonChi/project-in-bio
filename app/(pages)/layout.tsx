@@ -20,7 +20,7 @@ export default function RootLayout({
       >
         {children}
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!} />
+      <GoogleAnalytics gaId="G-XYZ" />
     </html>
   );
 }
